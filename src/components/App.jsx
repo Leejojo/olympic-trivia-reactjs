@@ -14,8 +14,13 @@ export default class App extends React.Component {
   // this.state.quiz is the entire json object
 
   selectCategory(categoryId) {
-    var categories = this.state.quiz.categories;
-    var category = categories.find(function(category) {
+    // early return if one of the categories is selected
+
+    if (this.state.quiz.categories.some(function(category){
+      return category.is_selected;
+    })) return;
+
+    var category = this.state.quiz.categories.find(function(category) {
       return category.id == categoryId;
     });
 
