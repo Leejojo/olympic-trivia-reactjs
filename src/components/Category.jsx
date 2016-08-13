@@ -17,7 +17,7 @@ class Category extends React.Component {
     if (!this.props.category.is_selected) {
       return <h3 onClick={() => this.props.selectCategory(this.props.category.id)} >{this.props.category.subject}</h3>;
     } else {
-      return <Question question={this.findNextQuestion()} />;
+      return <Question question={this.findNextQuestion()} answerQuestion={this.props.answerQuestion} />;
     }
   }
 
@@ -34,12 +34,7 @@ class Category extends React.Component {
 
 // <div>
 //   {this.props.category.questions[0].text}
-//   <ul>
-//     <li>{this.props.category.questions[0].choices[0].text}</li>
-//     <li>{this.props.category.questions[0].choices[1].text}</li>
-//     <li>{this.props.category.questions[0].choices[2].text}</li>
-//     <li>{this.props.category.questions[0].choices[3].text}</li>
-//   </ul>
+
 // </div>
 
 export default Category;
