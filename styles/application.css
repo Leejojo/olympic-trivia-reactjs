@@ -6,10 +6,9 @@
   margin: 0;
 }
 
-button{
+.circleQ{
   height: 200px;
   width: 200px;
-  background: lightblue;
   border-radius: 100%;
 }
 

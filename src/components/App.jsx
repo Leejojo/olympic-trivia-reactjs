@@ -1,73 +1,89 @@
 import React from 'react';
-import {getQuestions} from '../lib/fake_api';
-import Question from './Question.jsx';
+import fetch from 'isomorphic-fetch';
+import Questions from './Questions.jsx';
+
 
 export default class App extends React.Component {
 
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
-			questions: [],
-			selectedQuestion: null
+			title: null,
+			catagories: '',
+			user_answers: [],
+			step: 0
+
 		}
-	};
+	}
 
 
 	// getting data.
-	componentDidMount(){
+	componentDidMount() {
 		console.log('componentDidMount!');
-	  	this._callAPI();
-	}
+		this._callAPI();
 
+	}
 
 
 	render() {
-	console.log('render!');
+		console.log('render!');
 
-	  const {selectedQuestion} = this.state;
-	  console.log('selected question: ', selectedQuestion);
+		if (!this.state) {
+			return <div> umm, wonder what happened </div>
+		}
+		const { selectedQuestion } = this.state;
 
-	  const quizData = this.state.questions.length > 0
-	  ? this.state.questions.map(val =>
-	    <Question key={val.id} selected={ selectedQuestion === val.id}>
+		const color = this.state.catagories.length > 0 ?
+			this.state.catagories.map(val =>
+				<Questions key = {val.id} data={val.questions} step={this.state.step } color={val.color}>
+					{val.subject}
+				</Questions>
+			)
+			:"loading or something...";
 
-	  		<button onClick={() => this.questionPicked(val.id, val.q)}>{val.c}</button>
-		 </Question>
 
-	  ):"loading or something...";
+		return (
+			<div>
+				<h1> {this.state.title} </h1>
+				<p>{this.state.step} </p>
+				<div >{color}</div>
 
-	return(
-		<div className="app-container">
-			{ quizData }
-		</div>
-	)
-  	// if (this.state && this.state.questions){
-	  //   return (
-    	//   <div className='app-container'>
-		// 	  <Header />
-		// 	  <Questions questions={this.state.questions} />
-	  //     </div>
-    	// )
-  	// }else{
-  	// 	return <h1>loading ...</h1>
-  	// }
-  }
 
-  _callAPI = () => {
-	  console.log('call API');
 
-	  const self = this;
+			</div>
+		)
+	}
 
-	  getQuestions((data) => {
-		  self.setState({questions: data})
-	  });
-  }
-	questionPicked = (id, question) => {
-		console.log('id: ', id);
-		console.log('question: ', question);
-		this.selectedQuestion = 1;
+	_callAPI = () => {
+		const self = this;
+
+		fetch('../src/lib/fake_api.json')
+			.then(responseData => responseData.json())
+			.then(responseData => {
+
+				const qz = responseData[0].categories.map( val =>
+					{return {
+						catagory: val.subject,
+						color: val.color,
+						questions: val.questions
+					}
+					}
+				);
+
+
+				self.setState({
+					title: responseData[0].name,
+					catagories: qz
+
+				});
+			});
+
 
 	}
 
+
+
+
+
+
 }
- 
