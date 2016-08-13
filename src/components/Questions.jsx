@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 
-const Questions = ({data, step, color}) =>{
-	console.log({data});
-	console.log({step});
-	console.log({color});
 
+const Questions = (props) => {
 
+	const color = props.color;
+	const subject = props.subject;
+	function buttonClickWrapper(e) {
+		e.preventDefault();
+		props.onClick(props);
+	}
 	return(
-		<button className="circleQ" style={{backgroundColor: color}}>
 
-			{ data[0].question_text }
+		<button key= {color} className="circleQ" style={{color: color } } onClick={buttonClickWrapper}>
+
+			{ subject}
 
 		</button>
 

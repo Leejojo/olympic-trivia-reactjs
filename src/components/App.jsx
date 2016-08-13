@@ -2,7 +2,6 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import Questions from './Questions.jsx';
 
-
 export default class App extends React.Component {
 
 	constructor(props) {
@@ -11,7 +10,8 @@ export default class App extends React.Component {
 			title: null,
 			catagories: '',
 			user_answers: [],
-			step: 0
+			step: 0,
+			selectedQuestion: null
 
 		}
 	}
@@ -35,9 +35,13 @@ export default class App extends React.Component {
 
 		const color = this.state.catagories.length > 0 ?
 			this.state.catagories.map(val =>
-				<Questions key = {val.id} data={val.questions} step={this.state.step } color={val.color}>
-					{val.subject}
-				</Questions>
+				<Questions key = {val.id}
+						   color={val.color}
+						   subject={val.subject}
+						   questions={val.questions}
+						   step={this.state.step}
+						   onClick={this._buttonClickedHandler}
+				></Questions>
 			)
 			:"loading or something...";
 
@@ -45,7 +49,6 @@ export default class App extends React.Component {
 		return (
 			<div>
 				<h1> {this.state.title} </h1>
-				<p>{this.state.step} </p>
 				<div >{color}</div>
 
 
@@ -63,7 +66,7 @@ export default class App extends React.Component {
 
 				const qz = responseData[0].categories.map( val =>
 					{return {
-						catagory: val.subject,
+						subject: val.subject,
 						color: val.color,
 						questions: val.questions
 					}
@@ -71,6 +74,26 @@ export default class App extends React.Component {
 				);
 
 
+				// const cc = [];
+				// for (var i = 0; i < responseData[0].categories.length; i++) {
+				// 	const catgLst = {
+				// 		catagory: responseData[0].categories[i].subject,
+				// 		color: responseData[0].categories[i].color,
+				// 	}
+				// 	cc.push(catgLst);
+				// }
+
+				// for (var i=0; i < responseData[0].catagories[0].questions.length; i++){
+				// 	const qq = {
+				// 		qstn: responseData[0].catagories[0].questions[i].question_text
+				// 	}
+				// }
+
+				// const qz = f(responseData[0].categories, cc){
+				// 	for()
+				// }
+
+				//set state
 				self.setState({
 					title: responseData[0].name,
 					catagories: qz
@@ -80,8 +103,11 @@ export default class App extends React.Component {
 
 
 	}
+	_buttonClickedHandler = (quizInfo) => {
+		console.log('in button handler');
 
 
+	}
 
 
 
