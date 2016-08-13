@@ -1,16 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Question from './Question.jsx';
 
 class Category extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  findNextQuestion() {
+    return this.props.category.questions.find(function(question){
+      return !question.is_answered;
+    });
+  }
+
   renderCategory() {
     if (!this.props.category.is_selected) {
       return <h3 onClick={() => this.props.selectCategory(this.props.category.id)} >{this.props.category.subject}</h3>;
     } else {
-      return "question";
+      return <Question question={this.findNextQuestion()} />;
     }
   }
 
@@ -18,10 +25,12 @@ class Category extends React.Component {
     return (
       <div id='circle' style={{background: this.props.category.color}}>
         {this.renderCategory()}
-      </div>)
-    ;
+      </div>
+    )
   }
 }
+
+// random question (never answered)
 
 // <div>
 //   {this.props.category.questions[0].text}
