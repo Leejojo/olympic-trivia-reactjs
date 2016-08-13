@@ -15,6 +15,6 @@ export default class Question extends React.Component{
 	render(){
 		return(
 			<button onClick={this.update}>{this.state.txt}</button>
-			 )
+		)
 	}
 }
