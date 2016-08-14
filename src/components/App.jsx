@@ -55,6 +55,7 @@ export default class App extends React.Component {
 
     if ((this.state.strikes >= 3) || (this.state.categoriesWon >= 5)){
       this.state.quiz.is_over = true
+      alert("You lost, GAME OVER!")  
     }
     this.forceUpdate();
   }
@@ -64,14 +65,15 @@ export default class App extends React.Component {
 	    return (
     	  <div className='app-container'>
 			    <Header />
-            <div>
+          <div>Categories Won: {this.state.categoriesWon}</div>
+          <div>Strikes: {this.state.strikes}</div>          
+          <div>
             {this.state.quiz.categories.map((category) => {
-                return (
-                  <Category key={category.id} category={category} selectCategory={this.selectCategory.bind(this)} answerQuestion={this.answerQuestion.bind(this)}/>
-                )
-              })
-            }
-            </div>
+              return (
+                <Category key={category.id} category={category} selectCategory={this.selectCategory.bind(this)} answerQuestion={this.answerQuestion.bind(this)}/>
+              )
+            })}
+          </div>
 	      </div>
     	)
   	} else {
