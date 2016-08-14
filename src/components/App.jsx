@@ -2,6 +2,7 @@ import React from 'react';
 import fetch from 'isomorphic-fetch';
 import Questions from './Questions.jsx';
 
+
 export default class App extends React.Component {
 
 	constructor(props) {
@@ -10,8 +11,7 @@ export default class App extends React.Component {
 			title: null,
 			catagories: '',
 			user_answers: [],
-			step: 0,
-			selectedQuestion: null
+			displayQuestions: true
 
 		}
 	}
@@ -26,35 +26,41 @@ export default class App extends React.Component {
 
 
 	render() {
-		console.log('render!');
+		console.log('App render!');
 
-		if (!this.state) {
-			return <div> umm, wonder what happened </div>
+		if (this.state.catagories.length > 0) {
+			if (this.state.displayQuestions) {
+
+				const questionPg = this.state.catagories.map(val =>
+					<Questions key={val.id} >
+						<button className="circleQ"
+								style={{backgroundColor: val.color} }
+								onClick={() => this.questionPicked(val)}>{val.subject}</button>
+					</Questions>
+				)
+
+				return (
+					<div>
+						<div className="header">{this.state.title}</div>
+						<div className="content"> {questionPg}</div>
+					</div>
+				)
+			} else {
+				debugger
+				return (
+					<div>
+						<div className="header">{this.state.title}</div>
+						<div className="content">  Display Quiz Here :) </div>
+					</div>
+				)
+			}
+		}else{
+			return (<h1>loading page...</h1>)
 		}
-		const { selectedQuestion } = this.state;
-
-		const color = this.state.catagories.length > 0 ?
-			this.state.catagories.map(val =>
-				<Questions key = {val.id}
-						   color={val.color}
-						   subject={val.subject}
-						   questions={val.questions}
-						   step={this.state.step}
-						   onClick={this._buttonClickedHandler}
-				></Questions>
-			)
-			:"loading or something...";
-
-
-		return (
-			<div>
-				<h1> {this.state.title} </h1>
-				<div >{color}</div>
 
 
 
-			</div>
-		)
+
 	}
 
 	_callAPI = () => {
@@ -73,40 +79,26 @@ export default class App extends React.Component {
 					}
 				);
 
-
-				// const cc = [];
-				// for (var i = 0; i < responseData[0].categories.length; i++) {
-				// 	const catgLst = {
-				// 		catagory: responseData[0].categories[i].subject,
-				// 		color: responseData[0].categories[i].color,
-				// 	}
-				// 	cc.push(catgLst);
-				// }
-
-				// for (var i=0; i < responseData[0].catagories[0].questions.length; i++){
-				// 	const qq = {
-				// 		qstn: responseData[0].catagories[0].questions[i].question_text
-				// 	}
-				// }
-
-				// const qz = f(responseData[0].categories, cc){
-				// 	for()
-				// }
-
 				//set state
 				self.setState({
 					title: responseData[0].name,
-					catagories: qz
+					catagories: qz,
+					step: 0
 
 				});
 			});
 
 
 	}
-	_buttonClickedHandler = (quizInfo) => {
-		console.log('in button handler');
 
-
+	questionPicked = (data) => {
+		console.log('in question picked');
+		debugger;
+		this.setState({
+			...data,
+			selectedQuestion: data.id,
+			displayQuestions: false
+		});
 	}
 
 
