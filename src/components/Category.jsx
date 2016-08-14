@@ -15,7 +15,7 @@ class Category extends React.Component {
 
   renderCategory() {
     if (!this.props.category.is_selected) {
-      return <h3 onClick={() => this.props.selectCategory(this.props.category.id)} >{this.props.category.subject}</h3>;
+      return <h3 onClick={() =>{if (!this.props.category.is_won) this.props.selectCategory(this.props.category.id)}} >{this.props.category.subject}</h3>;
     } else {
       return <Question question={this.findNextQuestion()} answerQuestion={this.props.answerQuestion} />;
     }
@@ -23,7 +23,7 @@ class Category extends React.Component {
 
   render() {
     return (
-      <div id='circle' style={{background: this.props.category.color}}>
+      <div id='circle' className={this.props.category.is_won ? "won" : null} style={{background: this.props.category.color}}>
         {this.renderCategory()}
       </div>
     )

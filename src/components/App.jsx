@@ -8,7 +8,9 @@ export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      quiz: getQuiz()
+      quiz: getQuiz(),
+      strikes: 0,
+      categoriesWon: 0
     };
   }
   // this.state.quiz is the entire json object
@@ -40,17 +42,20 @@ export default class App extends React.Component {
     })
 
     if (choice.is_correct) {
-      console.log("correct")
+      this.state.categoriesWon += 1
+      console.log("categories won: ", this.state.categoriesWon)
       category.is_won = true
-      // increment points
     } else {
-      console.log("nope!")
-      // increment strikes
+      this.state.strikes += 1
+      console.log("strikes: ", this.state.strikes)
     }
 
     category.is_selected = false
     question.is_answered = true
 
+    if ((this.state.strikes >= 3) || (this.state.categoriesWon >= 5)){
+      this.state.quiz.is_over = true
+    }
     this.forceUpdate();
   }
 
@@ -58,14 +63,15 @@ export default class App extends React.Component {
   	if (this.state.quiz){
 	    return (
     	  <div className='app-container'>
-			  <Header />
-        {
-          this.state.quiz.categories.map((category) => {
-            return (
-              <Category key={category.id} category={category} selectCategory={this.selectCategory.bind(this)} answerQuestion={this.answerQuestion.bind(this)}/>
-            )
-          })
-        }
+			    <Header />
+            <div>
+            {this.state.quiz.categories.map((category) => {
+                return (
+                  <Category key={category.id} category={category} selectCategory={this.selectCategory.bind(this)} answerQuestion={this.answerQuestion.bind(this)}/>
+                )
+              })
+            }
+            </div>
 	      </div>
     	)
   	} else {
