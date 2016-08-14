@@ -63,11 +63,11 @@ export default class App extends React.Component {
   render() {
   	if (this.state.quiz){
 	    return (
-    	  <div className='app-container'>
+    	  <div>
 			    <Header />
           <div>Categories Won: {this.state.categoriesWon}</div>
           <div>Strikes: {this.state.strikes}</div>          
-          <div>
+          <div className="categories-container">
             {this.state.quiz.categories.map((category) => {
               return (
                 <Category key={category.id} category={category} selectCategory={this.selectCategory.bind(this)} answerQuestion={this.answerQuestion.bind(this)}/>

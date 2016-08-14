@@ -1,10 +1,7 @@
-.app-container{
-  display: block;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  margin: 0;
+.categories-container {
+  display: inline-block;
 }
+
 
 #circle{
   height: 200px;
