@@ -1,11 +1,24 @@
-.categories-container {
-  display: inline-block;
+.header {
+  text-align: center;
 }
 
 
-#circle{
-  height: 200px;
-  width: 200px;
+.categories-container {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-end;
+  align-items: center;
+  width: 1200px;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+
+.circle{
+  height: 360px;
+  width: 360px;
   border-radius: 50%;
+  margin-bottom: -150px;
+  text-align: center;
 }
 

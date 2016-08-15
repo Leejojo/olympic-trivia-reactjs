@@ -19,6 +19,7 @@ export default class App extends React.Component {
     if (this.state.quiz.categories.some(function(category){
       return category.is_selected;
     })) return;
+    //early return
 
     var category = this.findCategory(categoryId);
 
@@ -55,16 +56,17 @@ export default class App extends React.Component {
 
     if ((this.state.strikes >= 3) || (this.state.categoriesWon >= 5)){
       this.state.quiz.is_over = true
-      alert("You lost, GAME OVER!")  
+      alert("GAME OVER!")  
     }
     this.forceUpdate();
   }
 
   render() {
   	if (this.state.quiz){
+      <img src="http://i-wallsearch.com/data/wallpapers/34/645842-olympics.jpg" />
 	    return (
     	  <div>
-			    <Header />
+			    <Header header={this.state.quiz.name} />
           <div>Categories Won: {this.state.categoriesWon}</div>
           <div>Strikes: {this.state.strikes}</div>          
           <div className="categories-container">
