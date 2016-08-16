@@ -23,19 +23,11 @@ class Category extends React.Component {
 
   render() {
     return (
-      <div className={this.props.category.is_won ? "circle won" : "circle"} style={this.props.category.is_won ? {background: this.props.category.color} : {border: `solid 20px ${this.props.category.color}`}}>
+      <div className={this.props.category.is_won ? "circle won" : "circle"} style={this.props.category.is_won ? {background: this.props.category.color} : {border: `solid 40px ${this.props.category.color}`}}>
         {this.renderCategory()}
       </div>
     )
   }
 }
 
-// random question (never answered)
-
-// <div>
-//   {this.props.category.questions[0].text}
-
-// </div>
-
 export default Category;
-

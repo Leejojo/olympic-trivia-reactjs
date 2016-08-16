@@ -13,7 +13,6 @@ export default class App extends React.Component {
       categoriesWon: 0
     };
   }
-  // this.state.quiz is the entire json object
 
   selectCategory(categoryId) {
     if (this.state.quiz.categories.some(function(category){
@@ -63,12 +62,9 @@ export default class App extends React.Component {
 
   render() {
   	if (this.state.quiz){
-      <img src="http://i-wallsearch.com/data/wallpapers/34/645842-olympics.jpg" />
 	    return (
     	  <div>
-			    <Header header={this.state.quiz.name} />
-          <div>Categories Won: {this.state.categoriesWon}</div>
-          <div>Strikes: {this.state.strikes}</div>          
+			    <Header header={this.state.quiz.name} />         
           <div className="categories-container">
             {this.state.quiz.categories.map((category) => {
               return (
