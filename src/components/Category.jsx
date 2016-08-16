@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Question from './Question.jsx';
 
-class Category extends React.Component {
+export default class Category extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -29,5 +29,3 @@ class Category extends React.Component {
     )
   }
 }
-
-export default Category;

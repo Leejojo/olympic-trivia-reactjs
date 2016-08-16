@@ -22,7 +22,7 @@ export function getQuiz() {
       ]}
     ]},
     {"id":18,"quiz_id":6,"subject":"Mascot","color":"#000000","created_at":"2016-08-10T20:32:21.913Z","updated_at":"2016-08-10T20:32:21.913Z","questions":[
-      {"id":50,"category_id":18,"text":"Vinicius is a mix of different Brazilian ______","created_at":"2016-08-10T20:32:21.913Z","updated_at":"2016-08-10T20:32:21.913Z","choices":[
+      {"id":50,"category_id":18,"text":"Vinicius is a mix of different Brazilian ______?","created_at":"2016-08-10T20:32:21.913Z","updated_at":"2016-08-10T20:32:21.913Z","choices":[
         {"id":197,"question_id":50,"text":"cartoon characters","is_correct":false,"created_at":"2016-08-10T20:32:21.914Z","updated_at":"2016-08-10T20:32:21.914Z"},
         {"id":198,"question_id":50,"text":"animals","is_correct":true,"created_at":"2016-08-10T20:32:21.916Z","updated_at":"2016-08-10T20:32:21.916Z"},
         {"id":199,"question_id":50,"text":"celebrities","is_correct":false,"created_at":"2016-08-10T20:32:21.917Z","updated_at":"2016-08-10T20:32:21.917Z"},

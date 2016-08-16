@@ -7,9 +7,9 @@ export default class Question extends React.Component{
 
 	render(){
 		return (
-			<div>
+			<p>
 				{this.props.question.text}
-			  <ul>
+			  <br />
 			  	{
 			  		this.props.question.choices.map((choice) => {
 				  		return (
@@ -17,8 +17,7 @@ export default class Question extends React.Component{
 				  		)
 				  	})
 			  	}
-			  </ul>
-			</div>
+			</p>
 		)
 	}
 }

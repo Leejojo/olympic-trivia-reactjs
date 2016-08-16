@@ -1,82 +1,30 @@
-import React from 'react';
-import Header from './Header.jsx';
-import {getQuiz} from './lib/fake_api';
-import Category from './Category.jsx';
+import React, { Component } from 'react'
+import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router'
+import Quiz from './Quiz.jsx';
 
-export default class App extends React.Component {
-
-  constructor() {
-    super();
-    this.state = {
-      quiz: getQuiz(),
-      strikes: 0,
-      categoriesWon: 0
-    };
-  }
-
-  selectCategory(categoryId) {
-    if (this.state.quiz.categories.some(function(category){
-      return category.is_selected;
-    })) return;
-    //early return
-
-    var category = this.findCategory(categoryId);
-
-    category.is_selected = true;
-    this.forceUpdate();
-  }
-
-  findCategory(categoryId) {
-    return this.state.quiz.categories.find(function(category) {
-      return category.id == categoryId;
-    });
-  }
-
-  answerQuestion(categoryId, questionId, choiceId) {
-    var category = this.findCategory(categoryId);
-    var question = category.questions.find(function(question) {
-      return question.id == questionId;
-    })
-    var choice = question.choices.find(function(choice) {
-      return choice.id == choiceId;
-    })
-
-    if (choice.is_correct) {
-      this.state.categoriesWon += 1
-      console.log("categories won: ", this.state.categoriesWon)
-      category.is_won = true
-    } else {
-      this.state.strikes += 1
-      console.log("strikes: ", this.state.strikes)
-    }
-
-    category.is_selected = false
-    question.is_answered = true
-
-    if ((this.state.strikes >= 3) || (this.state.categoriesWon >= 5)){
-      this.state.quiz.is_over = true
-    }
-    this.forceUpdate();
-  }
-
+export default class App extends Component {
   render() {
-  	if (this.state.quiz){
-	    return (
-    	  <div>
-			    <Header header={this.state.quiz.name} />         
-          <div className="categories-container">
-            {this.state.quiz.categories.map((category) => {
-              return (
-                <Category key={category.id} category={category} selectCategory={this.selectCategory.bind(this)} answerQuestion={this.answerQuestion.bind(this)}/>
-              )
-            })}
-          </div>
-	      </div>
-    	)
-  	} else {
-  		return <h1>loading ...</h1>
-  	}
+    return (
+      <Router history={hashHistory}>
+        <Route path='/' component={Container}>
+          <Route path="/" component={Home} />
+          <Route path="/quiz" component={Quiz} />
+          <Route path='*' component={NotFound} />
+        </Route>
+      </Router>
+    )
   }
-  
 }
- 
+
+const Nav = () => (
+  <div className="homepage-buttons">
+    <Link className="button" to='/'>Home</Link>&nbsp;
+    <Link className="button" to='/quiz'>Play Game</Link>
+  </div>
+)
+const Container = (props) => <div>
+  <Nav />
+  {props.children}
+</div>
+const Home = () => <h1>Hello from Home!</h1>
+const NotFound = () => (<h1>404.. This page is not found!</h1>)
