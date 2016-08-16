@@ -55,7 +55,6 @@ export default class App extends React.Component {
 
     if ((this.state.strikes >= 3) || (this.state.categoriesWon >= 5)){
       this.state.quiz.is_over = true
-      alert("GAME OVER!")  
     }
     this.forceUpdate();
   }
