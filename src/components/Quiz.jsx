@@ -1,17 +1,33 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
-import {getQuiz} from './fake_api.js';
 import Category from './Category.jsx';
+import $ from "jquery"
 
 export default class Quiz extends React.Component {
 
   constructor() {
     super();
     this.state = {
-      quiz: getQuiz(),
       strikes: 0,
       categoriesWon: 0
     };
+  }
+
+  loadQuizFromServer() {
+    $.ajax({
+      url: "http://localhost:3000/api/quizzes/6",
+      dataType:'json',
+      success: (quiz) => {
+        this.setState({quiz: quiz});
+      },
+      error: (xhr, status, err) => {
+        console.error(status, err.toString());
+      }
+    });
+  }
+
+  componentDidMount() {
+    this.loadQuizFromServer();
   }
 
   selectCategory(categoryId) {
@@ -69,7 +85,7 @@ export default class Quiz extends React.Component {
     if (this.state.quiz){
       return (
         <div className="app">
-          <div className="strikes">Strikes</div>
+          <div className="lives">Strikes</div>
           <div className="strikes-counter">{this.state.strikes}</div>
           <a className="categories-container">
             {this.state.quiz.categories.map((category) => {

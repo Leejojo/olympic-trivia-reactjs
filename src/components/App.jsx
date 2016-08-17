@@ -22,5 +22,5 @@ export default class App extends React.Component {
 
 }
 
-const Home = () => <Link className="button" to='/quiz'>Play Game</Link>
+const Home = () => <Link className="button" to='/quiz'>Let's Play!</Link>
 const NotFound = () => (<h1>404.. This page is not found!</h1>)
