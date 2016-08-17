@@ -1,7 +1,8 @@
 import React from 'react';
 import { hashHistory } from 'react-router';
 import Category from './Category.jsx';
-import $ from "jquery"
+import Medals from './Medals.jsx';
+import $ from "jquery";
 
 export default class Quiz extends React.Component {
 
@@ -69,12 +70,12 @@ export default class Quiz extends React.Component {
     category.is_selected = false
     question.is_answered = true
 
-    if ((this.state.strikes >= 3 )){
+    if (this.state.strikes >= 3 ){
       this.state.quiz.is_over = true
       hashHistory.push('/lost')
     }
 
-    if ((this.state.categoriesWon >= 5)){
+    if (this.state.categoriesWon >= 5){
       this.state.quiz.is_over = true
       hashHistory.push('/won')
     }
@@ -85,8 +86,7 @@ export default class Quiz extends React.Component {
     if (this.state.quiz){
       return (
         <div className="app">
-          <div className="lives">Strikes</div>
-          <div className="strikes-counter">{this.state.strikes}</div>
+          <Medals strikes={this.state.strikes} categoriesWon={this.state.categoriesWon}/>
           <a className="categories-container">
             {this.state.quiz.categories.map((category) => {
               return (
