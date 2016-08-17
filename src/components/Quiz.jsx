@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './Header.jsx';
+import { hashHistory } from 'react-router';
 import {getQuiz} from './fake_api.js';
 import Category from './Category.jsx';
 
@@ -55,16 +55,15 @@ export default class Quiz extends React.Component {
 
     if ((this.state.strikes >= 3) || (this.state.categoriesWon >= 5)){
       this.state.quiz.is_over = true
+      hashHistory.push('/results')
     }
-    debugger
     this.forceUpdate();
   }
 
   render() {
     if (this.state.quiz){
       return (
-        <div className="app">
-          <Header header={this.state.quiz.name} />         
+        <div className="app">   
           <a className="categories-container">
             {this.state.quiz.categories.map((category) => {
               return (
@@ -78,5 +77,4 @@ export default class Quiz extends React.Component {
       return <h1>loading ...</h1>
     }
   }
-  
 }
