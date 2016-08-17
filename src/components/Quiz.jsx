@@ -53,9 +53,14 @@ export default class Quiz extends React.Component {
     category.is_selected = false
     question.is_answered = true
 
-    if ((this.state.strikes >= 3) || (this.state.categoriesWon >= 5)){
+    if ((this.state.strikes >= 3 )){
       this.state.quiz.is_over = true
-      hashHistory.push('/results')
+      hashHistory.push('/lost')
+    }
+
+    if ((this.state.categoriesWon >= 5)){
+      this.state.quiz.is_over = true
+      hashHistory.push('/won')
     }
     this.forceUpdate();
   }
@@ -63,7 +68,9 @@ export default class Quiz extends React.Component {
   render() {
     if (this.state.quiz){
       return (
-        <div className="app">   
+        <div className="app">
+          <div className="strikes">Strikes</div>
+          <div className="strikes-counter">{this.state.strikes}</div>
           <a className="categories-container">
             {this.state.quiz.categories.map((category) => {
               return (
