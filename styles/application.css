@@ -2,6 +2,7 @@
   display: inline-block;
   width: 120px;
   padding-top: 20px;
+  transition: margin-left 1s ease-out;
 }
 
 .runner-wrapper{
@@ -40,7 +41,7 @@
   font-size: 80px;
   color: gold;
   margin-top: 250px;
-  margin-left: 250px;
+  margin-left: 220px;
   font-family: sans-serif;
 }
 

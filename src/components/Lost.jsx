@@ -10,7 +10,7 @@ export default class Lost extends React.Component {
     return (
       <div>
         <div className="result">You Lost</div>
-        <Link className="play-again" to='/'>Play Again</Link>
+        <Link className="play-again" to='/quiz'>Play Again</Link>
       </div>
     )
   }

@@ -10,7 +10,7 @@ export default class Won extends React.Component {
     return (
       <div>
         <div className="result">WINNER!</div>
-        <Link className="play-again" to='/'>Play Again</Link>
+        <Link className="play-again" to='/quiz'>Play Again</Link>
       </div>
     )
   }
