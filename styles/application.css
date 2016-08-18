@@ -1,3 +1,41 @@
+.runner{
+  display: inline-block;
+  width: 120px;
+  padding-top: 20px;
+}
+
+.runner-wrapper{
+  text-align: left;
+  padding-left: 40px;
+}
+
+.position-1 {
+  margin-left: 16%;
+}
+
+.position-2 {
+  margin-left: 32%;
+}
+
+.position-3 {
+  margin-left: 48%;
+}
+
+.position-4 {
+  margin-left: 64%
+}
+
+.medals {
+  width: 120px;
+  padding-right: 40px;
+  margin-left: 0px;
+  margin-top: -120px;
+}
+
+.race {
+  text-align: right;
+}
+
 .result {
   font-size: 80px;
   color: gold;
@@ -43,7 +81,6 @@
   width: 1200px;
   justify-content: center;
   margin: 0px auto;
-  padding-top: 20px;
 }
 
 .lives {

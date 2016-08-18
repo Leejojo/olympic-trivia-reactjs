@@ -5,20 +5,28 @@ export default class Medals extends React.Component {
     super(props);
   }
 
-  medal() {
+  medalSrc() {
     if (this.props.strikes == 0) {
-      return <img src="../../images/300px-Gold_medal_olympic.svg.png" />;
+      return "300px-Gold_medal_olympic.svg.png";
     } else if (this.props.strikes == 1) {
-      return <img src="../../images/300px-Silver_medal_olympic.svg.png" />;
+      return "300px-Silver_medal_olympic.svg.png";
     } else {
-      return <img src="../../images/Bronze_medal_olympic.svg" />;
+      return "Bronze_medal_olympic.svg";
     }
 
   }
 
+  runner() {
+    return <img className={`runner position-${this.props.categoriesWon}`} src="../../images/noun_17825_cc(1).png" />;
+  }
+
   render() {
     return (
-      <div>{this.medal()}</div>
+      <div className="race">
+        <div className="runner-wrapper">{this.runner()}</div>
+        <img className="medals" src={`../../images/${this.medalSrc()}`} />
+        }
+      </div>
     )
   }
 }
